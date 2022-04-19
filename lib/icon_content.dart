@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class cardContent extends StatelessWidget {
   final IconData theIcon;
   final String theText;

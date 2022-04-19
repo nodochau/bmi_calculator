@@ -9,7 +9,8 @@ const bottomContainerHeight = 80.0;
 const bottomContainerColor = Color.fromARGB(255, 37, 190, 178);
 const activeColor = Color.fromARGB(255, 2, 35, 51);
 const inactiveColor = Color.fromARGB(169, 42, 35, 65);
-enum Gender { male, female }
+enum Gender { male, female, na }
+const numberValue = TextStyle(fontSize: 25.0, fontWeight: FontWeight.w900);
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender? selectedGender;
+  Gender selectedGender = Gender.na;
   // ignore: non_constant_identifier_names
   // void UpdateCardColor(Gender selectedGender) {
   //   //Using ternary operator instead of using if else
@@ -64,68 +65,61 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
                 child: Row(
               children: [
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedGender = Gender.male;
-                    });
-                  },
-                  child: ReusableCard(
-                    colour: selectedGender == Gender.male
-                        ? activeColor
-                        : inactiveColor,
-                    cardWidget: cardContent(
-                      theIcon: FontAwesomeIcons.mars,
-                      theText: 'MALE',
-                    ),
-                  ),
-                )),
+                    child: ReusableCard(
+                        onPress: () {
+                          setState(() {
+                            selectedGender = Gender.male;
+                          });
+                        },
+                        colour: selectedGender == Gender.male
+                            ? activeColor
+                            : inactiveColor,
+                        cardWidget: cardContent(
+                            theIcon: FontAwesomeIcons.mars,
+                            theText: 'FEMALE'))),
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedGender = Gender.female;
-                    });
-                  },
-                  child: ReusableCard(
-                      colour: selectedGender == Gender.female
-                          ? activeColor
-                          : inactiveColor,
-                      cardWidget: cardContent(
-                          theIcon: FontAwesomeIcons.venus, theText: 'FEMALE')),
-                )),
+                    child: ReusableCard(
+                        onPress: () {
+                          setState(() {
+                            selectedGender = Gender.female;
+                          });
+                        },
+                        colour: selectedGender == Gender.female
+                            ? activeColor
+                            : inactiveColor,
+                        cardWidget: cardContent(
+                            theIcon: FontAwesomeIcons.venus,
+                            theText: 'FEMALE'))),
               ],
             )),
             Expanded(
-                child: ReusableCard(
-              colour: activeColor,
-              cardWidget: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    FontAwesomeIcons.mars,
-                    size: 80.0,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+              child: Column(
+                children: [
+                  ReusableCard(
+                      colour: inactiveColor,
+                      cardWidget: cardContent(
+                          theIcon: FontAwesomeIcons.appStore,
+                          theText: 'HEIGHT'),
+                      onPress: () {}),
                   Text(
-                    'MALE',
-                    style: TextStyle(color: Colors.blue, fontSize: 18.0),
-                  ),
+                    '180',
+                    style: numberValue,
+                  )
                 ],
               ),
-            )),
+            ),
             Expanded(
                 child: Row(
               children: [
                 Expanded(
                     child: ReusableCard(
+                  onPress: () {},
                   colour: activeColor,
                   cardWidget: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -146,6 +140,7 @@ class _InputPageState extends State<InputPage> {
                 )),
                 Expanded(
                     child: ReusableCard(
+                  onPress: () {},
                   colour: activeColor,
                   cardWidget: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
